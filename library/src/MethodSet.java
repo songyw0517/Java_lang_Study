@@ -1,7 +1,7 @@
 import java.util.HashSet;
 import java.util.Set;
 
-public class BasicSet {
+public class MethodSet {
     public static void main(String[] args) {
         /************** set 생성 방법 *************/
         Set<String> set1 = new HashSet<>();

@@ -11,7 +11,6 @@ public class InputExample {
 
         // 1차원 배열 숫자로 받기
 
-
         // 2차원 배열 숫자로 받기
 
     }

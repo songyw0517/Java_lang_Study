@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BasicList {
+public class MethodList {
     public static void main(String[] args) {
         /************ 리스트 생성 방법 ************/
         List<Integer> list1 = new ArrayList<>();
