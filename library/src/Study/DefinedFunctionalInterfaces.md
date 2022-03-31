@@ -78,6 +78,61 @@ public static void main(String[]args){
     - objDoubleConsumer -> void accept(T t, double value)
     - BiConsumer<T, U> -> void accept(T t, U u)
      
-### Function<T, R>
+### Function<T, R> : T : 매개변수형, R : 반환형
 - R apply(T t) : 입출력 출력이 있음
+```java
+class FunctionDemo{
+  public static void main(String[] args) {
+    // String을 받아 Integer로 반환할 것이다
+    Function<String, Integer> f = s -> s.length();
+    
+    System.out.println(f.apply("Robot"));
+    System.out.println(f.apply("System"));
+  }
+}
+```
+- #### Function<T, R> 의 친구들
+  - IntToDoubleFunction
+  - DoubleToIntFunction
+  - IntUnaryOperator
+  - DoubleUnaryOperator
+  <br><br>
+  - BiFunction<T, U, R>
+  - IntFunction<R>
+  - DoubleFunction<R>
+  <br><br>
+  - ToIntFunction<T>
+  - ToDoubleFunction<T>
+  - ToIntBiFunction<T, U>
+  - ToDoubleBiFunction<T, U>
+  <br><br>
+  - UnaryOperator<T>
+  - BinaryOperator<T>
 
+# removeif 메소드
+- Collection<E> 인터페이스의 디폴트 메소드이다.
+```java
+default boolean removeIf(Predicate<? super E> filter){ ... }
+```
+- Predicate<? super E>의 조건에 맞는 원소를 삭제하겠다는 의미를 가진다.
+
+## removeif 메소드의 사용 1
+```java
+public static void main(String[]args){
+    List<Integer> ls1 = Arrays.asList(1, -2, 3, -4, 5);
+    ls1 = new ArrayList<>(ls1);
+    
+    List<Double> ls2 = Arrays.asList(-1.1, 2.2, 3.3, -4.4, 5.5);
+    
+    // 삭제 조건
+    Predicate<Number> p = n -> n.doubleValue() < 0.0;
+    ls1.removeIf(p);
+    ls2.removeIf(p);
+    
+    System.out.println(ls1);
+    System.out.println(ls2);
+}
+```
+- 왜 Predicate<T>의 T에 Number을 전달했는가?
+  - <? super E> 때문 (하한 제한)이다.
+  - List<Integer>, List<Double> 둘 다 적용하기 위해 사용되었다.
