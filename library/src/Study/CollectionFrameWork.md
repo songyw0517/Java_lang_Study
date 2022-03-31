@@ -362,3 +362,148 @@ public static void main(String[]args){
     System.out.println();
 }
 ```
+
+<hr>
+<hr>
+
+# Queue<E> 인터페이스를 구현하는 컬렉션 클래스들
+- Queue<E>
+- Deque<E>
+
+# 1. Queue<E>, 큐
+## Queeue<E> 인터페이스의 메소드들
+- boolean add(E e) : 넣기
+- E remove() : 꺼내기, 삭제
+- E element() : 확인하기
+
+## 위의 메소드의 예외를 처리하기 위한 메소드 (권장)
+- boolean offer(E e) : 넣기, 넣을 공간이 부족하면 false 반환
+- E poll() : 꺼내기, 꺼낼 대상 없으면 null 반환
+- E peek() : 확인하기, 확인할 대상이 없으면 null 반환
+
+## 큐의 구현
+```java
+public static void main(String[]args){
+    Queue<String> que = new LinkedList<>();
+    que.offer("Box");
+    que.offer("Toy");
+    que.offer("Robot");
+    
+    // 무엇이 나올지 확인
+    System.out.println("next = "+que.peek());
+
+    // 첫번째, 두번재 인스턴스 꺼내기
+    System.out.println(que.poll());
+    System.out.println(que.poll());
+    
+    // 무엇이 다음에 나올지 확인
+    System.out.println("next = "+que.peek());
+    
+    // 마지막 인스턴스 꺼내기
+    System.out.println(que.poll());
+    
+}
+```
+[코드 설명]
+- LinkedList<E>는 List<E>와 동시에 Queue<E>를 구현하는 컬렉션 클래스입니다.
+<br>따라서 어떠한 타입의 참조 변수로 참조하느냐에 따라 '리스트' 또는 '큐'로 사용할 수 있습니다.
+
+# 2. Deque<E>, 스택
+## Deque<E> 인터페이스의 메소드들
+### <앞에서 넣고 확인>
+- boolean offerFirst(E e) : 넣기 공간 부족하면 false 반환
+- E poolFirst() : 꺼내기, 꺼낼 대상 없으면 null 반환
+- E peekFirst() : 확인하기, 확인할 대상 없으면 null 반환
+
+### <뒤에서 넣고 확인>
+- boolean offerLast(E e) : 넣기, 공간이 부족하면 false 반환
+- E poolLast() : 꺼내기, 꺼낼 대상 없으면 null 반환
+- E peekLast() : 확인하기, 확인할 대상 없으면 null 반환
+
+## 스택의 구현
+```java
+public static void main(String[]args){
+    Deque<String> deq = new ArrayDeque<>();
+    Deque<String> deq = new LinkedList<>(); // 이렇게도 생성이 가능하다.
+    
+    // 앞으로 넣고
+    deq.offerFirst("1.Box");
+    deq.offerFirst("2.Toy");
+    deq.offerFirst("3.Robot");
+    
+    // 앞에서 꺼내기
+    System.out.println(deq.pollFirst());
+    System.out.println(deq.pollFirst());
+    System.out.println(deq.pollFirst());
+        
+}
+```
+
+<hr>
+<hr>
+
+# Map<K, V> 인터페이스를 구현하는 컬렉션 클래스들
+- Iterable 인터페이스를 구현하지 않는다. -> 반복자를 얻을 수 없다.
+- HashMap
+- TreeMap
+## HashMap<K, V>
+```java
+public static void main(String[]args){
+    HashMap<Integer, String> map = new HashMap<>();
+    
+    // Key-Value 기반 데이터 저장
+    map.put(45, "Brown");    
+    map.put(37, "James");   
+    map.put(23, "Martin");
+    
+    // 데이터 탐색
+    System.out.println("23번 : "+map.get(23));
+    System.out.println("37번 : "+map.get(37));
+    System.out.println("45번 : "+map.get(45));
+    System.out.println();
+    
+    // 데이터 삭제
+    map.remove(37);
+    
+    // 데이터 삭제 확인
+    System.out.println("37번 : "+map.get(37));    
+}
+```
+## Map 전체 데이터에 접근하려면?
+```java
+public Set<K> KeySet(); // 메소드를 이용하여 접근한다.
+
+public static void main(String[]args){
+        HashMap<Integer, String> map=new HashMap<>();
+
+        // Key-Value 기반 데이터 저장
+        map.put(45,"Brown");
+        map.put(37,"James");
+        map.put(23,"Martin");
+        
+        // Key만 담고 있는 컬렉션 인스턴스 생성 (Set)
+        Set<Integer> ks = map.keys();
+        
+        // 전체 key 출력
+        for(Integer n : ks)
+            System.out.print(n.toString() + '\t');
+        System.out.println();
+        
+        // 전체 Value 출력
+        for(Integer n : ks)
+            System.out.print(map.get(n) + '\t');
+        System.out.println();
+        
+        // 전체 Value 출력 (반복자 기반)
+        for(Iterator<Integer> itr = ks.iterator(); itr.hasNext();)
+            System.out.print(map.get(itr.next()) + '\t');
+        System.out.println();
+        
+}
+```
+
+## TreeMap<K, V>
+- 데이터를 저장시, 정렬을 하며 저장을 한다.
+```java
+TreeMap<Integer, String> map = new TreeMap<>();
+```
